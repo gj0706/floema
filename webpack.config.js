@@ -2,10 +2,11 @@ const path = require("path");
 // Copy files and folders in webpack
 const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-// const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+// const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const IS_DEVELOPMENT = process.env.NODE_ENV === "dev";
 
@@ -38,6 +39,7 @@ module.exports = {
     }),
 
     new CleanWebpackPlugin(),
+    // new HtmlWebpackPlugin(),
     // new ImageMinimizerPlugin({
     // 	minimizer: {
     // 		options: {
@@ -54,7 +56,12 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        use: "babel-loader",
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env"],
+          },
+        },
       },
       {
         test: /\.scss$/,
@@ -95,18 +102,18 @@ module.exports = {
       },
 
       // {
-      // 	test: /\.(jpe?g|g|png|gif|svg|webp)$/i,
-      // 	use: [
-      // 		{
-      // 			loader: ImageMinimizerPlugin.loader,
-      // 			options: {
-      // 				severityError: "warning", // Ignore errors on corrupted images
-      // 				minimizerOptions: {
-      // 					plugins: ["gifsicle"],
-      // 				},
-      // 			},
-      // 		},
-      // 	],
+      //   test: /\.(jpe?g|g|png|gif|svg|webp)$/i,
+      //   use: [
+      //     {
+      //       loader: ImageMinimizerPlugin.loader,
+      //       options: {
+      //         severityError: "warning", // Ignore errors on corrupted images
+      //         minimizer: {
+      //           plugins: ["gifsicle"],
+      //         },
+      //       },
+      //     },
+      //   ],
       // },
       // {
       // 	test: /\.(jpe?g|png|gif|svg|webp)$/i,
@@ -134,6 +141,45 @@ module.exports = {
   },
   optimization: {
     minimize: true,
-    minimizer: [new TerserPlugin()],
+    minimizer: [
+      new TerserPlugin(),
+      new ImageMinimizerPlugin({
+        minimizer: {
+          implementation: ImageMinimizerPlugin.imageminMinify,
+          options: {
+            // Lossless optimization with custom option
+            // Feel free to experiment with options for better result for you
+            plugins: [
+              ["gifsicle", { interlaced: true }],
+              ["jpegtran", { progressive: true }],
+              // ["optipng", { optimizationLevel: 5 }],
+              // Svgo configuration here https://github.com/svg/svgo#configuration
+              [
+                "svgo",
+                {
+                  plugins: [
+                    {
+                      name: "preset-default",
+                      params: {
+                        overrides: {
+                          removeViewBox: false,
+                          addAttributesToSVGElement: {
+                            params: {
+                              attributes: [
+                                { xmlns: "http://www.w3.org/2000/svg" },
+                              ],
+                            },
+                          },
+                        },
+                      },
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+      }),
+    ],
   },
 };
