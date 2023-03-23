@@ -18,7 +18,7 @@ app.use(methodOverride());
 app.use(errorHandler());
 
 // static files
-app.use(express.static(path.join(__dirname, "views")));
+app.use(express.static(path.join(__dirname, "public")));
 
 // view engine setup
 app.set("view engine", "pug");
@@ -33,10 +33,10 @@ const initApi = (req) => {
 
 // Link Resolver: this function will be used to generate links to Prismic.io documents
 const handleLinkResolver = (doc) => {
-  console.log(doc);
   if (doc.type === "product") return `/detail/${doc.slug}`;
   if (doc.type === "collections") return "/collections";
   if (doc.type === "about") return "/about";
+  // default to home page
   return "/";
 };
 
@@ -62,7 +62,7 @@ const handleRequest = async (api) => {
   const meta = await api.getSingle("meta");
   const navigation = await api.getSingle("navigation");
   const preloader = await api.getSingle("preloader");
-
+  console.log(meta);
   return {
     meta,
     navigation,
@@ -76,6 +76,7 @@ app.get("/", async (req, res) => {
   const defaults = await handleRequest(api);
   const home = await api.getSingle("home");
 
+  // console.log(defaults);
   const { results: collections } = await api.query(
     Prismic.Predicates.at("document.type", "collection"),
     { fetchLinks: "product.image" }
