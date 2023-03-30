@@ -1,9 +1,10 @@
 .about__gallery {
-  height: 70.6rem;
+  height: 58.6rem;
   position: relative;
   overflow: hidden;
-  pointer-events: none;
-  visibility: hidden;
+  // margin: 20rem 0;
+  // pointer-events: none;
+  // visibility: hidden;
 
   &:first-child {
     margin-bottom: 0;
@@ -27,5 +28,7 @@
   margin: 0 4rem;
 }
 .about__gallery__media__image {
+  @extend %cover;
+
   object-fit: cover;
 }

@@ -1,3 +1,5 @@
+/*! ../../classes/Page */
+
 /*! ../modules/logger/index.js */
 
 /*! ../node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */
@@ -30,6 +32,14 @@
 
 /*! ./overlay.js */
 
+/*! ./pages/About/index */
+
+/*! ./pages/Collections/index */
+
+/*! ./pages/Details/index */
+
+/*! ./pages/Home//index */
+
 /*! ./socket.js */
 
 /*! ./surrogate-pairs */
@@ -52,8 +62,6 @@
 
 /*! html-entities */
 
-/*! images/phone1.png */
-
 /*! tapable/lib/SyncBailHook */
 
 /*! webpack/hot/emitter.js */
@@ -70,13 +78,29 @@
   !*** ./styles/index.scss ***!
   \***************************/
 
-/*!*******************************!*\
-  !*** ./app/images/phone1.png ***!
-  \*******************************/
+/*!*****************************!*\
+  !*** ./app/classes/Page.js ***!
+  \*****************************/
+
+/*!*********************************!*\
+  !*** ./app/pages/Home/index.js ***!
+  \*********************************/
+
+/*!**********************************!*\
+  !*** ./app/pages/About/index.js ***!
+  \**********************************/
+
+/*!************************************!*\
+  !*** ./app/pages/Details/index.js ***!
+  \************************************/
 
 /*!***************************************!*\
   !*** ./node_modules/events/events.js ***!
   \***************************************/
+
+/*!****************************************!*\
+  !*** ./app/pages/Collections/index.js ***!
+  \****************************************/
 
 /*!*****************************************!*\
   !*** ./node_modules/webpack/hot/log.js ***!

@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "frontend:build": "webpack --progress --config webpack.config.build.js",
-    "frontend:development": "webpack-dev-server --progress --config webpack.config.development.js",
+    "frontend:build": "webpack --config webpack.config.build.js",
+    "frontend:development": "webpack-dev-server --config webpack.config.development.js",
     "backend:build": "node app.js",
     "backend:development": "nodemon app.js",
     "start": "concurrently --kill-others \"npm run backend:development\" \"npm run frontend:development\""

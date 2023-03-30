@@ -59,10 +59,11 @@ app.use((req, res, next) => {
 
 // helper function to handle async requests
 const handleRequest = async (api) => {
-  const meta = await api.getSingle("meta");
+  const meta = await api.getSingle("metadata");
   const navigation = await api.getSingle("navigation");
   const preloader = await api.getSingle("preloader");
-  console.log(meta);
+
+  console.log("meta:     ", meta);
   return {
     meta,
     navigation,
@@ -75,7 +76,7 @@ app.get("/", async (req, res) => {
   const api = await initApi(req);
   const defaults = await handleRequest(api);
   const home = await api.getSingle("home");
-
+  console.log(home);
   // console.log(defaults);
   const { results: collections } = await api.query(
     Prismic.Predicates.at("document.type", "collection"),
@@ -89,6 +90,7 @@ app.get("/about", async (req, res) => {
   const api = await initApi(req);
   const defaults = await handleRequest(api);
   const about = await api.getSingle("about");
+  console.log("about:  ", about.data.gallery);
 
   res.render("pages/about", { ...defaults, about });
 });
@@ -100,7 +102,7 @@ app.get("/detail/:uid", async (req, res) => {
   const product = await api.getByUID("product", req.params.uid, {
     fetchLinks: "collection.title",
   });
-  console.log(product.data.highlights);
+  console.log(product.data);
   res.render("pages/detail", { ...defaults, product });
 });
 
@@ -114,8 +116,9 @@ app.get("/collections", async (req, res) => {
     Prismic.Predicates.at("document.type", "collection"),
     { fetchLinks: "product.image" }
   );
-  console.log(collections);
-  console.log(home);
+  console.log("collections:", collections);
+  console.log("home: ", home);
+  console.log("meta: ", defaults.meta);
   res.render("pages/collections", { ...defaults, home, collections });
 });
 
