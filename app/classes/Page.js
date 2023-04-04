@@ -1,7 +1,9 @@
 import GSAP from "gsap";
+import NormalizeWheel from "normalize-wheel";
 import each from "lodash/each";
+import map from "lodash/map";
 import Prefix from "prefix";
-
+import Title from "../animations/Title";
 /**
  * This is a Page parent class that provides the page's parent id, selector and it's children selectors for future use.
  */
@@ -10,7 +12,10 @@ export default class Page {
   constructor({ element, elements, id }) {
     this.id = id;
     this.selector = element;
-    this.selectorChildren = { ...elements };
+    this.selectorChildren = {
+      ...elements,
+      animationsTitles: '[data-animation="title"]',
+    };
     this.transformPrefix = Prefix("transform");
     console.log(this.transformPrefix);
 
@@ -36,7 +41,7 @@ export default class Page {
       limit: 0, // pixels that mousewheel can scroll the most
     };
 
-    // iterate through all the children elements and check
+    // Iterate through all the children elements and select all of them
     each(this.selectorChildren, (entry, key) => {
       if (
         entry instanceof window.HTMLElement ||
@@ -53,6 +58,15 @@ export default class Page {
         }
       }
       console.log("elements: ", this.elements[key], entry);
+    });
+
+    this.createAnimations();
+  }
+
+  createAnimations() {
+    console.log(this.elements.animationsTitles);
+    this.animationsTitles = map(this.elements.animationsTitles, (element) => {
+      return new Title({ element });
     });
   }
 
@@ -88,8 +102,8 @@ export default class Page {
   }
 
   onMouseWheel(event) {
-    const { deltaY } = event;
-    this.scroll.target += deltaY;
+    const { pixelY } = NormalizeWheel(event);
+    this.scroll.target += pixelY;
   }
 
   onResize() {

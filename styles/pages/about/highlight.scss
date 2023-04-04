@@ -10,6 +10,7 @@
     margin-bottom: 0;
   }
 }
+
 .about__highlight__wrapper {
   height: 104rem;
   width: 144rem;
@@ -30,7 +31,7 @@
   }
 }
 
-.about__highlight__title {
+.about__highlight__label {
   @extend %description-12;
 
   text-transform: uppercase;
@@ -50,7 +51,7 @@
   }
 }
 
-.about__highlight__label {
+.about__highlight__title {
   @extend %title-200;
   padding-bottom: 2rem;
   position: absolute;
@@ -96,6 +97,7 @@
     }
   }
 }
+
 .about__highlight__media__image {
   @extend %cover;
 
