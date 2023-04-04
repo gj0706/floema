@@ -4,11 +4,13 @@ import Home from "./pages/Home//index";
 import Detail from "./pages/Details/index";
 import Collections from "./pages/Collections/index";
 import Preloader from "./components/Preloader";
+import Navigation from "./components/Navigation";
 
 class App {
   constructor() {
-    this.createPreloader();
     this.createContent();
+    this.createPreloader();
+    this.createNavigation();
     this.createPages();
 
     this.addEventListeners();
@@ -17,6 +19,10 @@ class App {
     this.onResize();
 
     this.update();
+  }
+
+  createNavigation() {
+    this.navigation = new Navigation({ template: this.template });
   }
 
   createPreloader() {
@@ -64,6 +70,8 @@ class App {
       const divContent = div.querySelector(".content");
       this.template = divContent.getAttribute("data-template");
 
+      this.navigation.onChange(this.template);
+
       this.content.setAttribute("data-template", this.template);
       this.content.innerHTML = divContent.innerHTML;
 
@@ -108,7 +116,7 @@ class App {
         event.preventDefault();
         const { href } = link;
         this.onChange(href);
-        console.log(event, href);
+        // console.log(event, href);
       };
     });
   }

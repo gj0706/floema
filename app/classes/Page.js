@@ -9,6 +9,8 @@ import Highlight from "animations/Highlight";
 import Title from "animations/Title";
 import Paragraph from "animations/Paragraph";
 import Label from "animations/Label";
+
+import { ColorsManager } from "classes/Colors";
 /**
  * This is a Page parent class that provides the page's parent id, selector and it's children selectors for future use.
  */
@@ -25,7 +27,7 @@ export default class Page {
       animationsLabels: '[data-animation="label"]',
     };
     this.transformPrefix = Prefix("transform");
-    console.log(this.transformPrefix);
+    // console.log(this.transformPrefix);
 
     this.onMouseWheelEvent = this.onMouseWheel.bind(this);
   }
@@ -65,7 +67,7 @@ export default class Page {
           this.elements[key] = document.querySelector(entry);
         }
       }
-      console.log("elements: ", this.elements[key], entry);
+      // console.log("elements: ", this.elements[key], entry);
     });
 
     this.createAnimations();
@@ -109,6 +111,11 @@ export default class Page {
   // show page animation
   show() {
     return new Promise((resolve) => {
+      ColorsManager.change({
+        backgroundColor: this.element.getAttribute("data-background"),
+        color: this.element.getAttribute("data-color"),
+      });
+
       this.animationIn = GSAP.timeline();
       this.animationIn.fromTo(
         this.element,

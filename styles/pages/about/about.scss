@@ -1,8 +1,8 @@
 .about {
   @extend %page;
-  background: $color-cadet-blue;
-  color: $color-bright-grey;
-  opacity: 0;
+  // background: $color-cadet-blue;
+  // color: $color-bright-grey;
+  // opacity: 0;
 }
 
 .about__wrapper {
@@ -11,7 +11,7 @@
 
 .about__title {
   @extend %title-100;
-  max-width: 124rem;
+  max-width: 126rem;
   margin: auto;
   text-align: center;
 

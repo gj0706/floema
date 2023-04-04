@@ -10,8 +10,8 @@ html {
   position: fixed;
   line-height: 1;
   overflow: hidden;
-  // background: $color-contessa;
-  // color: $color-white;
+  background: $color-contessa;
+  color: $color-white;
 
   @include media("<phone") {
     font-size: calc(100vw / 750px * 10px);
@@ -24,7 +24,6 @@ body {
   font-family: $font-suisse-bp;
   position: fixed;
 
-  // position: fixed;
   @include media("<phone") {
     font-size: 100px;
   }
