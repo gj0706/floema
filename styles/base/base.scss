@@ -66,10 +66,10 @@ img {
 
 // [data-animation="paragraph"],
 // [data-animation="label"],
-// [data-animation="title"] {
-//   span {
-//     display: inline-block;
-//     overflow: hidden;
-//     vertical-align: top;
-//   }
-// }
+[data-animation="title"] {
+  span {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+  }
+}

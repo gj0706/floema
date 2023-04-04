@@ -3,7 +3,7 @@
   justify-content: center;
   position: relative;
   // width: 125.8rem;
-  margin: 20rem auto;
+  margin: 20rem 0;
 
   &:first-child {
     margin-top: 0;
@@ -31,6 +31,7 @@
     }
   }
 }
+
 .about__content__wrapper {
   display: flex;
 
@@ -106,6 +107,7 @@
     width: calc(100% - 15rem);
   }
 }
+
 .about__content__media {
   position: relative;
 
@@ -169,6 +171,7 @@
     }
   }
 }
+
 .about__content__media__image {
   @extend %cover;
 
