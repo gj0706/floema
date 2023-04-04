@@ -1,9 +1,14 @@
 import GSAP from "gsap";
 import NormalizeWheel from "normalize-wheel";
+import Prefix from "prefix";
+
 import each from "lodash/each";
 import map from "lodash/map";
-import Prefix from "prefix";
-import Title from "../animations/Title";
+
+import Highlight from "animations/Highlight";
+import Title from "animations/Title";
+import Paragraph from "animations/Paragraph";
+import Label from "animations/Label";
 /**
  * This is a Page parent class that provides the page's parent id, selector and it's children selectors for future use.
  */
@@ -14,7 +19,10 @@ export default class Page {
     this.selector = element;
     this.selectorChildren = {
       ...elements,
+      animationsHighlights: '[data-animation="highlight"]',
       animationsTitles: '[data-animation="title"]',
+      animationsParagraphs: '[data-animation="paragraph"]',
+      animationsLabels: '[data-animation="label"]',
     };
     this.transformPrefix = Prefix("transform");
     console.log(this.transformPrefix);
@@ -64,10 +72,38 @@ export default class Page {
   }
 
   createAnimations() {
-    console.log(this.elements.animationsTitles);
+    this.animations = [];
+
+    //Highlights
+    this.animationsHighlights = map(
+      this.elements.animationsHighlights,
+      (element) => {
+        return new Highlight({ element });
+      }
+    );
+
+    //Titles
     this.animationsTitles = map(this.elements.animationsTitles, (element) => {
       return new Title({ element });
     });
+
+    this.animations.push(this.animationsTitles);
+
+    //Paragraphs
+    this.animationsParagraphs = map(
+      this.elements.animationsParagraphs,
+      (element) => {
+        return new Paragraph({ element });
+      }
+    );
+    this.animations.push(this.animationsParagraphs);
+
+    //Labels
+    this.animationsLabels = map(this.elements.animationsLabels, (element) => {
+      return new Label({ element });
+    });
+
+    this.animations.push(...this.animationsLabels);
   }
 
   // show page animation
@@ -111,7 +147,24 @@ export default class Page {
       this.scroll.limit =
         this.elements.wrapper.clientHeight - window.innerHeight;
     }
+
+    // each(this.animations, (animation) => {
+    //   animation.onResize();
+    // });
+
+    each(this.animationsLabels, (animation) => {
+      animation.onResize();
+    });
+
     each(this.animationsTitles, (animation) => {
+      animation.onResize();
+    });
+
+    each(this.animationsParagraphs, (animation) => {
+      animation.onResize();
+    });
+
+    each(this.animationsHighlights, (animation) => {
       animation.onResize();
     });
   }

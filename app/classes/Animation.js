@@ -29,4 +29,6 @@ export default class Animation extends Component {
   animateOut() {
     this.isVisible = false;
   }
+
+  onResize() {}
 }

@@ -1,6 +1,7 @@
 import Animation from "../classes/Animation";
 import GSAP from "gsap";
 import { calculate, split } from "utils/text";
+import { each } from "lodash";
 
 export default class Title extends Animation {
   constructor({ element, elements }) {
@@ -22,18 +23,22 @@ export default class Title extends Animation {
    * It overrides the one in its parent class: Animation
    */
   animateIn() {
-    GSAP.set(this.element, { autoAlpha: 1 });
-    GSAP.fromTo(
-      this.elementsLines,
-      { y: "100%" },
-      {
-        autoAlpha: 1,
-        delay: 0.5,
-        duration: 1.5,
-        y: "0%",
-        stagger: { amount: 1, axis: "x" },
-      }
-    );
+    this.timelineIn = GSAP.timeline({ delay: 0.5 });
+    this.timelineIn.set(this.element, { autoAlpha: 1 });
+
+    each(this.elementsLines, (line, index) => {
+      this.timelineIn.fromTo(
+        line,
+        { y: "100%" },
+        {
+          delay: index * 0.2,
+          duration: 1.5,
+          y: "0%",
+          ease: "expo.out",
+        },
+        0
+      );
+    });
   }
 
   animateOut() {

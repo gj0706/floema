@@ -20,8 +20,6 @@
 
 /*! ../../classes/Page */
 
-/*! ../animations/Title */
-
 /*! ../classes/Animation */
 
 /*! ../modules/logger/index.js */
@@ -340,6 +338,14 @@
 
 /*! ./utils/stripAnsi.js */
 
+/*! animations/Highlight */
+
+/*! animations/Label */
+
+/*! animations/Paragraph */
+
+/*! animations/Title */
+
 /*! ansi-html-community */
 
 /*! classes/Component */
@@ -351,6 +357,8 @@
 /*! gsap */
 
 /*! html-entities */
+
+/*! lodash */
 
 /*! lodash/each */
 
@@ -387,6 +395,10 @@
 /*!*****************************!*\
   !*** ./app/classes/Page.js ***!
   \*****************************/
+
+/*!*********************************!*\
+  !*** ./app/animations/Label.js ***!
+  \*********************************/
 
 /*!*********************************!*\
   !*** ./app/animations/Title.js ***!
@@ -427,6 +439,14 @@
 /*!************************************!*\
   !*** ./node_modules/lodash/map.js ***!
   \************************************/
+
+/*!*************************************!*\
+  !*** ./app/animations/Highlight.js ***!
+  \*************************************/
+
+/*!*************************************!*\
+  !*** ./app/animations/Paragraph.js ***!
+  \*************************************/
 
 /*!*************************************!*\
   !*** ./app/components/Preloader.js ***!
@@ -478,6 +498,10 @@
 
 /*!***************************************!*\
   !*** ./node_modules/lodash/_toKey.js ***!
+  \***************************************/
+
+/*!***************************************!*\
+  !*** ./node_modules/lodash/lodash.js ***!
   \***************************************/
 
 /*!****************************************!*\
@@ -1071,6 +1095,15 @@
 /*!***********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/webpack-dev-server/client/index.js?protocol=ws%3A&hostname=0.0.0.0&port=8080&pathname=%2Fws&logging=info&overlay=true&reconnect=10&hot=true&live-reload=true ***!
   \***********************************************************************************************************************************************************************************/
+
+/**
+ * @license
+ * Lodash <https://lodash.com/>
+ * Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
+ * Released under MIT license <https://lodash.com/license>
+ * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+ * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+ */
 
 /**
  * Checks if an event is supported in the current execution environment.
