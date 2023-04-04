@@ -8,6 +8,7 @@
 }
 
 .navigation__link {
+  @extend %link--hidden;
   font-size: 0;
   position: absolute;
   left: 4rem;
@@ -28,17 +29,20 @@
     height: 4.3rem;
   }
 }
+
 .navigation__link__icon {
   display: block;
 }
-.navigation__list {
-}
+
+.navigation__list {}
+
 .navigation__list__item {
   position: absolute;
   right: 4rem;
   top: 4rem;
   pointer-events: auto;
 }
+
 .navigation__list__link {
   @extend %link--hidden;
   @extend %title-20;

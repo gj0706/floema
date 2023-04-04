@@ -10,6 +10,7 @@ import Title from "animations/Title";
 import Paragraph from "animations/Paragraph";
 import Label from "animations/Label";
 
+import AsyncLoad from "./AsyncLoad";
 import { ColorsManager } from "classes/Colors";
 /**
  * This is a Page parent class that provides the page's parent id, selector and it's children selectors for future use.
@@ -25,6 +26,7 @@ export default class Page {
       animationsTitles: '[data-animation="title"]',
       animationsParagraphs: '[data-animation="paragraph"]',
       animationsLabels: '[data-animation="label"]',
+      preloaders: "[data-src]",
     };
     this.transformPrefix = Prefix("transform");
     // console.log(this.transformPrefix);
@@ -71,6 +73,7 @@ export default class Page {
     });
 
     this.createAnimations();
+    this.createPreloader();
   }
 
   createAnimations() {
@@ -106,6 +109,12 @@ export default class Page {
     });
 
     this.animations.push(...this.animationsLabels);
+  }
+
+  createPreloader() {
+    this.preloaders = map(this.elements.preloaders, (element) => {
+      return new AsyncLoad({ element });
+    });
   }
 
   // show page animation
