@@ -2,15 +2,14 @@
 *::after,
 *::before {
   box-sizing: border-box;
-  user-select: none;
 }
 
 html {
-  // $vw: 100vw;
+  @extend %cover;
   font-size: calc(100vw / 1920px * 10px);
-  // position: fixed;
+  position: fixed;
   line-height: 1;
-  // overflow: hidden;
+  overflow: hidden;
   // background: $color-contessa;
   // color: $color-white;
 
@@ -20,8 +19,11 @@ html {
 }
 
 body {
+  @extend %cover;
   @extend %description-16;
   font-family: $font-suisse-bp;
+  position: fixed;
+
   // position: fixed;
   @include media("<phone") {
     font-size: 100px;
@@ -58,8 +60,9 @@ img {
 //   z-index: z("canvas");
 // }
 
-// .content {
-// }
+.content {
+  @extend %cover;
+}
 
 // [data-animation="paragraph"],
 // [data-animation="label"],

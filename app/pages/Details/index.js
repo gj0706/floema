@@ -2,7 +2,7 @@ import Page from "../../classes/Page";
 
 export default class Details extends Page {
   constructor() {
-    super({ id: "details" });
+    super({ id: "details", element: ".details", elements: {} });
     console.log("details");
   }
 }
