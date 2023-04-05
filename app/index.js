@@ -10,10 +10,10 @@ import Navigation from "./components/Navigation";
 class App {
   constructor() {
     this.createContent();
-    this.createCanvas();
+
     this.createPreloader();
     this.createNavigation();
-
+    this.createCanvas();
     this.createPages();
 
     this.addEventListeners();

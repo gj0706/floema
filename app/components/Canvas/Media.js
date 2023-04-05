@@ -1,10 +1,10 @@
 import GSAP from "gsap";
 import { Mesh, Program, Texture } from "ogl";
 
-import fragment from "shaders/home-fragment.glsl";
-import vertex from "shaders/home-vertex.glsl";
+import fragment from "shaders/plane-fragment.glsl";
+import vertex from "shaders/plane-vertex.glsl";
 
-export default class Media {
+export default class {
   constructor({ element, geometry, gl, index, scene, sizes }) {
     this.element = element;
     this.geometry = geometry;
