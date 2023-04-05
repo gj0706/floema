@@ -37,6 +37,7 @@
     "lodash": "^4.17.21",
     "mini-css-extract-plugin": "^2.7.3",
     "normalize-wheel": "^1.0.1",
+    "ogl": "^0.0.116",
     "optipng": "^4.2.0",
     "postcss-loader": "^7.0.2",
     "prefix": "^1.0.0",

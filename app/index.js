@@ -1,4 +1,5 @@
 import each from "lodash/each";
+import Canvas from "./components/Canvas";
 import About from "./pages/About/index";
 import Home from "./pages/Home//index";
 import Detail from "./pages/Details/index";
@@ -9,8 +10,10 @@ import Navigation from "./components/Navigation";
 class App {
   constructor() {
     this.createContent();
+    this.createCanvas();
     this.createPreloader();
     this.createNavigation();
+
     this.createPages();
 
     this.addEventListeners();
@@ -28,6 +31,10 @@ class App {
   createPreloader() {
     this.preloader = new Preloader();
     this.preloader.once("completed", this.onPreloaded.bind(this));
+  }
+
+  createCanvas() {
+    this.canvas = new Canvas();
   }
 
   createContent() {
@@ -55,6 +62,7 @@ class App {
 
     this.page.show();
   }
+
   /** /
    * a method to handle page navigation onclick using ajax, without
    * refreshing the page, similar to React RouterDOM
@@ -69,6 +77,7 @@ class App {
       div.innerHTML = html;
       const divContent = div.querySelector(".content");
       this.template = divContent.getAttribute("data-template");
+      this.background = divContent;
 
       this.navigation.onChange(this.template);
 
@@ -86,6 +95,9 @@ class App {
   }
 
   onResize() {
+    if (this.canvas && this.canvas.onResize) {
+      this.canvas.onResize();
+    }
     if (this.page && this.page.onResize) {
       this.page.onResize();
     }
@@ -95,6 +107,9 @@ class App {
    * Loop: this method updates on every animation frame changes
    */
   update() {
+    if (this.canvas && this.canvas.update) {
+      this.canvas.update();
+    }
     if (this.page && this.page.update) {
       this.page.update();
     }

@@ -1,3 +1,4 @@
+import Button from "../../animations/Button";
 import Page from "classes/Page";
 
 export default class Home extends Page {
@@ -10,13 +11,16 @@ export default class Home extends Page {
         link: ".home__link",
       },
     });
-    // console.log("home");
   }
   create() {
     super.create();
-    this.elements.link.addEventListener("click", (_) => console.log("clicked"));
+    this.link = new Button({
+      element: this.elements.link,
+    });
+    // this.elements.link.addEventListener("click", (_) => console.log("clicked"));
   }
-  destry() {
+  destroy() {
+    super.destroy();
     this.link.removeEventListeners();
   }
 }
