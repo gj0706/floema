@@ -1,9 +1,8 @@
-import { Renderer, Camera, Transform, Box, Program, Mesh } from "ogl"; // import vertex from "./shaders/vertex.glsl";
-// import fragment from "./shaders/fragment.glsl";
+import { Renderer, Camera, Transform } from "ogl";
 
-// import About from './About'
-// import Collections from './Collections'
-// import Home from './Home'
+import Home from "./Home";
+// import About from "./About";
+// import Collections from "./Collections";
 
 export default class Canvas {
   constructor() {
@@ -22,7 +21,9 @@ export default class Canvas {
     this.createRenderer();
     this.createCamera();
     this.createScene();
-    this.createCube();
+    this.onResize();
+    this.createHome();
+    // this.createCube();
   }
 
   createRenderer() {
@@ -38,29 +39,18 @@ export default class Canvas {
     this.camera.position.z = 5;
   }
 
-  createCube = () => {
-    const geometry = new Box(this.gl);
-    const program = new Program(this.gl, {
-      vertex: `
-        attribute vec3 position;
-        uniform mat4 modelViewMatrix;
-        uniform mat4 projectionMatrix;
-        void main() {
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-        }
-      `,
-      fragment: `
-        void main() {
-          gl_FragColor = vec4(1.0);
-        }
-      `,
-    });
-    this.mesh = new Mesh(this.gl, {
-      geometry,
-      program,
-    });
-    this.mesh.setParent(this.scene);
-  };
+  // createCube = () => {
+  //   const geometry = new Box(this.gl);
+  //   const program = new Program(this.gl, {
+  //     vertex,
+  //     fragment,
+  //   });
+  //   this.mesh = new Mesh(this.gl, {
+  //     geometry,
+  //     program,
+  //   });
+  //   this.mesh.setParent(this.scene);
+  // };
 
   createScene() {
     this.scene = new Transform();
@@ -112,14 +102,29 @@ export default class Canvas {
     this.camera.perspective({
       aspect: window.innerWidth / window.innerHeight,
     });
+
+    const fov = (this.camera.fov = Math.PI / 100);
+    const height = 2 * Math.tan(fov / 2) * this.camera.position.z;
+    const width = height * this.camera.aspect;
+
+    this.sizes = {
+      height,
+      width,
+    };
+
+    if (this.home) {
+      this.home.onResize({
+        sizes: this.sizes,
+      });
+    }
   }
 
   /**
    * Loop.
    */
   update() {
-    this.mesh.rotation.x += 0.01;
-    this.mesh.rotation.y += 0.01;
+    // this.mesh.rotation.x += 0.01;
+    // this.mesh.rotation.y += 0.01;
     this.renderer.render({
       camera: this.camera,
       scene: this.scene,
