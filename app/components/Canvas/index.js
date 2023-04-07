@@ -1,4 +1,4 @@
-import { Renderer, Camera, Transform } from "ogl";
+import { Renderer, Camera, Transform, Box } from "ogl";
 
 import Home from "./Home";
 // import About from "./About";
@@ -22,12 +22,13 @@ export default class Canvas {
     this.createCamera();
     this.createScene();
     this.onResize();
+    // this.createCube();
     this.createHome();
     // this.createCube();
   }
 
   createRenderer() {
-    this.renderer = new Renderer();
+    this.renderer = new Renderer({ alpha: true, antialias: true });
 
     this.gl = this.renderer.gl;
 
@@ -98,15 +99,12 @@ export default class Canvas {
 
   onResize() {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
-
     this.camera.perspective({
       aspect: window.innerWidth / window.innerHeight,
     });
-
-    const fov = (this.camera.fov = Math.PI / 100);
+    const fov = (this.camera.fov = Math.PI / 180);
     const height = 2 * Math.tan(fov / 2) * this.camera.position.z;
     const width = height * this.camera.aspect;
-
     this.sizes = {
       height,
       width,

@@ -1,11 +1,3 @@
-/*! gsap */
-
-/*! ogl */
-
-/*! shaders/home-fragment.glsl */
-
-/*! shaders/home-vertex.glsl */
-
 /*!****************************************!*\
   !*** ./app/components/Canvas/Media.js ***!
   \****************************************/

@@ -107,14 +107,14 @@ class App {
    * Loop: this method updates on every animation frame changes
    */
   update() {
+    this.frame = window.requestAnimationFrame(this.update.bind(this));
+
     if (this.canvas && this.canvas.update) {
       this.canvas.update();
     }
     if (this.page && this.page.update) {
       this.page.update();
     }
-
-    this.frame = window.requestAnimationFrame(this.update.bind(this));
   }
 
   /**
