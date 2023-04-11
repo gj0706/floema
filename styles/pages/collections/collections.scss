@@ -1,10 +1,11 @@
 .collections {
   @extend %page;
-  // @extend %cover;
+
+  z-index: 0;
+
   // background: $color-quicksand;
   // color: $color-white;
 }
-
 .collections__wrapper {
   @extend %cover;
   overflow: hidden;
@@ -13,7 +14,9 @@
 .collections__titles {
   @extend %vertical-titles;
 
-  @include media("<phone") {
+  transition: transform 1s ease;
+
+  @include media('<phone') {
     display: none;
   }
 }
@@ -28,7 +31,7 @@
 
 .collections__gallery {
   @extend %cover;
-
+  z-index: 1;
 }
 
 .collections__gallery__wrapper {
@@ -37,7 +40,7 @@
   left: 50%;
   position: absolute;
   top: 50%;
-  transform: translate(-50%);
+  transform: translate(-44.7rem * 0.5, -50%);
 }
 
 .collections__gallery__link {
@@ -62,13 +65,14 @@
 
 .collections__gallery__media__image {
   @extend %cover;
+
   object-fit: cover;
 }
 
 .collections__content {
   @extend %cover;
 
-  @include media("<phone") {
+  @include media('<phone') {
     display: none;
   }
 }
@@ -92,6 +96,7 @@
 
 .collections__article__description {
   @extend %description-16;
+
   max-width: 46rem;
 }
 
@@ -100,7 +105,7 @@
   position: absolute;
   bottom: 5rem;
 
-  @include media("<phone") {
+  @include media('<phone') {
     display: flex;
   }
 }

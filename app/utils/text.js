@@ -1,16 +1,22 @@
-import each from "lodash/each";
+import each from 'lodash/each';
 
-export function split({ element, expression = " ", append = true }) {
+/**
+ * Function that splits text into spans
+ * @param {string || HTMLElement} element
+ * @param {string} expression
+ * @param {bool} append
+ */
+export function split({ element, expression = ' ', append = true }) {
   const words = splitText(element.innerHTML.toString().trim(), expression);
 
-  let innerHTML = "";
+  let innerHTML = '';
 
   each(words, (line) => {
-    if (line.indexOf("<br>") > -1) {
-      const lines = line.split("<br>");
+    if (line.indexOf('<br>') > -1) {
+      const lines = line.split('<br>');
 
       each(lines, (line, index) => {
-        innerHTML += index > 0 ? "<br>" + parseLine(line) : parseLine(line);
+        innerHTML += index > 0 ? '<br>' + parseLine(line) : parseLine(line);
       });
     } else {
       innerHTML += parseLine(line);
@@ -19,14 +25,14 @@ export function split({ element, expression = " ", append = true }) {
 
   element.innerHTML = innerHTML;
 
-  const spans = element.querySelectorAll("span");
+  const spans = element.querySelectorAll('span');
 
   if (append) {
     each(spans, (span) => {
       const isSingleLetter = span.textContent.length === 1;
-      const isNotEmpty = span.innerHTML.trim() !== "";
-      const isNotAndCharacter = span.textContent !== "&";
-      const isNotDashCharacter = span.textContent !== "-";
+      const isNotEmpty = span.innerHTML.trim() !== '';
+      const isNotAndCharacter = span.textContent !== '&';
+      const isNotDashCharacter = span.textContent !== '-';
 
       if (
         isSingleLetter &&
@@ -43,6 +49,9 @@ export function split({ element, expression = " ", append = true }) {
 }
 
 export function calculate(spans) {
+  if (!spans.length) {
+    return;
+  }
   const lines = [];
   let words = [];
 
@@ -71,25 +80,25 @@ export function calculate(spans) {
 }
 
 function splitText(text, expression) {
-  const splits = text.split("<br>");
+  const splits = text.split('<br>');
 
   let words = [];
 
   each(splits, (item, index) => {
     if (index > 0) {
-      words.push("<br>");
+      words.push('<br>');
     }
 
     words = words.concat(item.split(expression));
 
     let isLink = false;
-    let link = "";
+    let link = '';
 
     const innerHTML = [];
 
     each(words, (word) => {
-      if (!isLink && (word.includes("<a") || word.includes("<strong"))) {
-        link = "";
+      if (!isLink && (word.includes('<a') || word.includes('<strong'))) {
+        link = '';
 
         isLink = true;
       }
@@ -98,17 +107,17 @@ function splitText(text, expression) {
         link += ` ${word}`;
       }
 
-      if (isLink && (word.includes("/a>") || word.includes("/strong>"))) {
+      if (isLink && (word.includes('/a>') || word.includes('/strong>'))) {
         innerHTML.push(link);
 
-        link = "";
+        link = '';
       }
 
-      if (!isLink && link === "") {
+      if (!isLink && link === '') {
         innerHTML.push(word);
       }
 
-      if (isLink && (word.includes("/a>") || word.includes("/strong>"))) {
+      if (isLink && (word.includes('/a>') || word.includes('/strong>'))) {
         isLink = false;
       }
     });
@@ -120,15 +129,13 @@ function splitText(text, expression) {
 }
 
 function parseLine(line) {
-  if (line === "") {
-    return line;
-  } else if (line === " ") {
-    return "&nbsp;";
-  } else {
-    line = line.trim();
+  line = line.trim();
 
-    return line === "<br>"
-      ? "<br>"
-      : `<span>${line}</span>` + (line.length > 1 ? " " : "");
+  if (line === '' || line === ' ') {
+    return line;
+  } else {
+    return line === '<br>'
+      ? '<br>'
+      : `<span>${line}</span>` + (line.length > 1 ? ' ' : '');
   }
 }

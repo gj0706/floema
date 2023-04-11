@@ -19,7 +19,7 @@
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.3",
-    "eslint": "^8.36.0",
+    "eslint": "^7.32.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-import": "^2.27.5",
@@ -37,6 +37,7 @@
     "include-media": "^2.0.0",
     "lodash": "^4.17.21",
     "mini-css-extract-plugin": "^2.7.3",
+    "node-fetch": "^2.6.7",
     "normalize-wheel": "^1.0.1",
     "ogl": "^0.0.116",
     "optipng": "^4.2.0",
@@ -52,6 +53,7 @@
   },
   "dependencies": {
     "@prismicio/client": "5.1.0",
+    "@prismicio/helpers": "^2.3.9",
     "body-parser": "^1.20.2",
     "concurrently": "^7.6.0",
     "dotenv": "^16.0.3",
@@ -59,9 +61,9 @@
     "express": "^4.18.2",
     "method-override": "^3.0.0",
     "morgan": "^1.10.0",
-    "node-fetch": "^3.3.1",
     "nodemon": "^2.0.21",
     "prismic-dom": "^2.2.7",
-    "pug": "^3.0.2"
+    "pug": "^3.0.2",
+    "ua-parser-js": "^1.0.35"
   }
 }
